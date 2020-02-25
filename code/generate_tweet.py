@@ -2,6 +2,7 @@ import gpt_2_simple as gpt2
 import twint
 import datetime
 import tweepy
+import os
 from keys import keys
 
 # Set the working directory to this Python file's path
