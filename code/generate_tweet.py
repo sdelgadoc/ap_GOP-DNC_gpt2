@@ -4,6 +4,9 @@ import datetime
 import tweepy
 from keys import keys
 
+# Set the working directory to this Python file's path
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 # Tweet prompt parameters
 day_offset = 1
 word_count = 3
@@ -32,7 +35,9 @@ for idx, tweet in enumerate(twint.output.tweets_list):
     
 # Get the first words of the most liked tweet
 tweet_id = twint.output.tweets_list[idx].id
-split_tweet = twint.output.tweets_list[idx].tweet.split()
+# Do a little clean up based on hard fought experience
+split_tweet = twint.output.tweets_list[idx].tweet.replace("“","")
+split_tweet = split_tweet.split()
 tweet_prompt = ""
 
 for idx, word in enumerate(split_tweet):
@@ -65,6 +70,7 @@ for model in models:
     tweet = tweet.strip("']")
     tweet = tweet.replace("\\n","\n")
     tweet = tweet.replace("\\'","\'")
+    tweet = tweet.replace("“","")
     tweet = tweet[0:279]
     
     gpt2.reset_session(sess)
