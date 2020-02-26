@@ -6,7 +6,8 @@ import os
 from keys import keys
 
 # Set the working directory to this Python file's path
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+file_directory = os.path.dirname(os.path.abspath(__file__))
+os.chdir(file_directory)
 
 # Tweet prompt parameters
 day_offset = 1
@@ -57,6 +58,8 @@ for model in models:
     gpt2.load_gpt2(sess, run_name=model)
     
     tweet = gpt2.generate(sess,
+                          run_name=model,
+                          checkpoint_dir=file_directory + "/checkpoint",
                           length=100,
                           temperature=.7,
                           nsamples=1,
