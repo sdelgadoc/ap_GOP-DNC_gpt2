@@ -76,7 +76,7 @@ for model in models:
                     idx_max_likes_count = idx
                 
             # Get the first words of the most liked tweet
-            split_tweet = twint.output.tweets_list[idx].tweet.split()
+            split_tweet = twint.output.tweets_list[idx_max_likes_count].tweet.split()
             tweet_prompt = ""
             
             for idx, word in enumerate(split_tweet):
