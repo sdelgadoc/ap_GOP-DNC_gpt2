@@ -10,15 +10,15 @@ file_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # General parameters
-day_offset = 1
+day_offset = 2
 models = ['538', 'DNC', 'GOP']
 tweet_files = {"DNC": "",
                "GOP": "",
                "538": "gpt2_gentext_clean.csv"
                }
 
-prompt_accounts = {"DNC": "ap_politics",
-                   "GOP": "ap_politics",
+prompt_accounts = {"DNC": "ap",
+                   "GOP": "ap",
                    "538": "NateSilver538"
                    }
 
@@ -53,7 +53,8 @@ for model in models:
         # Get dates for tweet filtering
         today = datetime.date.today()
         today = today - datetime.timedelta(days = day_offset)
-        yesterday = today - datetime.timedelta(days = 1)
+        yesterday = today - datetime.timedelta(days = 2)
+        
         
         # Get tweets based on date filters
         c = twint.Config()
@@ -83,6 +84,7 @@ for model in models:
                     tweet_prompt = tweet_prompt + word + " "
             
             tweet_prompt = tweet_prompt.strip(" ")
+            
             
             # Generate the tweet using the gpt-2 model
             sess = gpt2.start_tf_sess()
